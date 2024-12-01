@@ -13,7 +13,7 @@ function Home() {
   const fetchVideos = useCallback(async () => {
     try {
       const response = await axios.get("/api/videos")
-      if(Array.isArray(response.data)) {
+      if (Array.isArray(response.data)) {
         setVideos(response.data)
       } else {
         throw new Error("Unexpected response format")
@@ -31,23 +31,23 @@ function Home() {
   }, [fetchVideos])
 
   const handleDownload = useCallback((url: string, title: string) => {
-    () => {
-        const link = document.createElement("a");
-        link.href = url;
-        link.setAttribute("download", `${title}.mp4`);
-        link.setAttribute("target", "_blank");
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", `${title}.mp4`);
+    link.setAttribute("target", "_blank");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }, [])
 
-    }
-
-}, [])
-
-  if(loading) {
-    return <div>Loading...</div>
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <span className="loading loading-spinner loading-lg"></span>
+      </div>
+    );
   }
-  
+
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Videos</h1>
@@ -57,15 +57,13 @@ function Home() {
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {
-            videos.map((video) => (
-                <VideoCard
-                    key={video.id}
-                    video={video}
-                    onDownload={handleDownload}
-                />
-            ))
-          }
+          {videos.map((video) => (
+            <VideoCard
+              key={video.id}
+              video={video}
+              onDownload={handleDownload}
+            />
+          ))}
         </div>
       )}
     </div>

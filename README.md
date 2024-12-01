@@ -1,36 +1,106 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Cloudinary SaaS Platform
+
+A modern web application built with Next.js that provides powerful video and image management capabilities using Cloudinary's services.
+
+## Features
+
+### 1. Video Management
+- Upload videos with titles and descriptions
+- Automatic video compression and optimization
+- Video format standardization to MP4
+- Video duration tracking
+- Download capabilities
+- Size comparison between original and compressed versions
+
+### 2. Social Media Image Creator
+- Upload and transform images for various social media platforms
+- Supported formats:
+  - Instagram Square (1:1)
+  - Instagram Portrait (4:5)
+  - Twitter Post (16:9)
+  - Twitter Header (3:1)
+  - Facebook Cover (205:78)
+- Real-time image preview
+- One-click download of transformed images
+
+### 3. Authentication & Security
+- Secure user authentication powered by Clerk
+- Protected API routes
+- Secure file uploads
+
+## Technology Stack
+
+### Frontend
+- **Next.js 14**: React framework with App Router
+- **TypeScript**: For type-safe code
+- **Tailwind CSS**: For styling
+- **DaisyUI**: Component library
+- **next-cloudinary**: For Cloudinary image components
+
+### Backend
+- **Next.js API Routes**: Server-side functionality
+- **Prisma**: Database ORM
+- **Cloudinary SDK**: Media processing and storage
+- **Clerk**: Authentication and user management
+
+### Infrastructure
+- **Database**: PostgreSQL (via Prisma)
+- **Media Storage**: Cloudinary
+- **Authentication**: Clerk
 
 ## Getting Started
 
-First, run the development server:
-
+1. Clone the repository
+2. Install dependencies:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Set up environment variables:
+Copy `.env.sample` to `.env` and fill in the required values:
+```env
+NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+DATABASE_URL=your_database_url
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+CLERK_SECRET_KEY=your_clerk_secret_key
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+4. Run the development server:
+```bash
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+5. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+├── app/
+│   ├── (app)/             # Protected application routes
+│   ├── (auth)/            # Authentication routes
+│   ├── api/               # API endpoints
+├── components/            # Reusable React components
+├── prisma/               # Database schema and migrations
+├── public/               # Static assets
+├── types/                # TypeScript type definitions
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## API Endpoints
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `POST /api/video-upload`: Upload and process videos
+- `GET /api/videos`: Retrieve uploaded videos
+- `POST /api/image-upload`: Upload and process images
 
-## Deploy on Vercel
+## Contributing
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.

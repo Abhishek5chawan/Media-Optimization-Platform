@@ -10,11 +10,12 @@ function VideoUpload() {
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
   const [isUploading, setIsUploading] = useState(false)
+  const [uploadSuccess, setUploadSuccess] = useState(false)  // State to track upload success
+  const [uploadError, setUploadError] = useState(false)  // State to track upload error
 
   const router = useRouter()
   
-  //max file size of 60mb
-
+  // Max file size of 60mb
   const MAX_FILE_SIZE = 60 * 1024 * 1024
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -22,7 +23,7 @@ function VideoUpload() {
     if (!file) return
 
     if (file.size > MAX_FILE_SIZE) {
-      //todo add notification
+      // Add notification (this can be replaced with a notification UI component)
       alert("File size too large")
       return
     }
@@ -36,13 +37,24 @@ function VideoUpload() {
 
     try {
       const response = await axios.post("/api/video-upload", formData)
-      // check for 200 response
+
+      // Check for successful response and set uploadSuccess state
+      if (response.status === 200) {
+        setUploadSuccess(true)
+        setUploadError(false)
+      } else {
+        setUploadSuccess(false)
+        setUploadError(true)
+      }
     } catch (error) {
       console.log(error)
+      setUploadSuccess(false)
+      setUploadError(true)
     } finally {
       setIsUploading(false)
     }
   }
+
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Upload Video</h1>
@@ -81,9 +93,32 @@ function VideoUpload() {
             required
           />
         </div>
+
+        {/* Uploading Animation: Spinner or Progress bar */}
+        {isUploading && (
+          <div className="mt-4">
+            <div className="flex justify-center items-center space-x-2">
+              <span className="loading loading-spinner loading-lg"></span>
+              <span>Uploading...</span>
+            </div>
+          </div>
+        )}
+
+        {/* Success or Error Message */}
+        {uploadSuccess && (
+          <div className="mt-4 text-green-600 font-semibold">
+            Video uploaded successfully!
+          </div>
+        )}
+        {uploadError && (
+          <div className="mt-4 text-red-600 font-semibold">
+            Something went wrong. Please try again.
+          </div>
+        )}
+
         <button
           type="submit"
-          className="btn btn-primary"
+          className="btn btn-primary mt-4"
           disabled={isUploading}
         >
           {isUploading ? "Uploading..." : "Upload Video"}
@@ -93,4 +128,4 @@ function VideoUpload() {
   );
 }
 
-export default VideoUpload
+export default VideoUpload;
