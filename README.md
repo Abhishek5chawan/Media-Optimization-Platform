@@ -1,6 +1,6 @@
 # Cloudinary SaaS Platform
 
-A modern web application built with Next.js that provides powerful video and image management capabilities using Cloudinary's services.
+A modern web application built with Next.js that provides powerful video and image management capabilities using Cloudinary's AI services.
 
 ## Features
 
@@ -13,7 +13,7 @@ A modern web application built with Next.js that provides powerful video and ima
 - Size comparison between original and compressed versions
 
 ### 2. Social Media Image Creator
-- Upload and transform images for various social media platforms
+- Upload and transform images for various social media platforms using Cloudinary's AI
 - Supported formats:
   - Instagram Square (1:1)
   - Instagram Portrait (4:5)
