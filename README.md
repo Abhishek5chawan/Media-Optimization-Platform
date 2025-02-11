@@ -1,4 +1,5 @@
-# Cloudinary SaaS Platform
+# Media-Optimization-Platform
+
 
 A modern web application built with Next.js that provides powerful video and image management capabilities using Cloudinary's AI services.
 
